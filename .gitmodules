@@ -1,3 +1,6 @@
 [submodule "ubuntu-12.04/cookbooks"]
 	path = ubuntu-12.04/cookbooks
 	url = git@github.com:soondobu/cookbooks.git
+[submodule "centos-6.3/cookbooks"]
+	path = centos-6.3/cookbooks
+	url = git@github.com:soondobu/cookbooks.git
