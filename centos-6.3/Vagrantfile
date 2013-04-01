@@ -17,9 +17,6 @@ Vagrant::Config.run do |config|
   # SSH - Forward 22 to 2223
   config.vm.forward_port 22, 2223
   
-  # XRDP - Forward 3389 to 33389
-  config.vm.forward_port 3389, 33389
-  
   # Apply cookbooks
   config.vm.provision :chef_solo do |chef|
 	chef.cookbooks_path = "cookbooks"
