@@ -20,6 +20,6 @@ Vagrant::Config.run do |config|
   # Apply cookbooks
   config.vm.provision :chef_solo do |chef|
 	chef.cookbooks_path = "cookbooks"
-	chef.add_recipe("yum")
+	chef.add_recipe("boilerplate::yum_update")
 	end 
 end
