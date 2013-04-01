@@ -8,12 +8,15 @@ Vagrant::Config.run do |config|
   
   ### Main ###    
   # Setup the box - using a publicly maintained base box
-  config.vm.box_url = "https://dl.dropbox.com/u/7225008/Vagrant/CentOS-6.3-x86_64-minimal.box"
+  config.vm.box_url = "https://1412126a-vagrant.s3.amazonaws.com/CentOS-6.3-x86_64-reallyminimal.box"
   config.vm.box = "centos-6.3.box"
-
   
-  # SSH - Forward 22 to 2222
+  # Setup a shared folder
+  config.vm.share_folder "projects", "/projects", "c:\\projects", :create => true
+  
+  # SSH - Forward 22 to 2223
   config.vm.forward_port 22, 2223
+  
   # XRDP - Forward 3389 to 33389
   config.vm.forward_port 3389, 33389
   
