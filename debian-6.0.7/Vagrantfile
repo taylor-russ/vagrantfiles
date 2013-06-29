@@ -1,0 +1,22 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant::Config.run do |config|
+  ### Troubleshooting Options ###
+  
+  # Enable for console access in Virtualbox
+  config.vm.boot_mode = :gui
+  
+  ### Main ###    
+  # Setup the box - using a publicly maintained base box
+  config.vm.box_url = "https://dl.dropboxusercontent.com/u/13054557/vagrant_boxes/debian-squeeze.box"
+  config.vm.box = "debian-squeeze.box"
+  
+  # SSH - Forward 22 to 2222
+  config.vm.forward_port 22, 2222
+  
+  # Apply cookbooks
+  config.vm.provision :puppet do |puppet|
+	puppet.manifests_path = "manifests"
+
+	end 
+end
