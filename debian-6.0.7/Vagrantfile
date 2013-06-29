@@ -19,6 +19,15 @@ Vagrant::Config.run do |config|
   # SSH - Forward 22 to 2222
   config.vm.forward_port 22, 2222
 
+	# System memory
+	config.vm.customize ["modifyvm", :id, "--memory", 2048]
+	
+	# Video memory
+	config.vm.customize ["modifyvm", :id, "--vram", 128]
+	
+	# Enable 3d accel
+	config.vm.customize ["modifyvm", :id, "--accelerate3d", "on"]
+	
   # Apply cookbooks
   config.vm.provision :puppet do |puppet|
 	puppet.manifests_path = "manifests"
