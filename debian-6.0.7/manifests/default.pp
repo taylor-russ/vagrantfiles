@@ -65,6 +65,13 @@ package { "sakura":
 	require => Exec["apt-get update"],
 }
 
+# chromium-browser
+package { "chromium-browser":
+	ensure  => present,
+	require => Exec["apt-get update"],
+}
+
+
 # Development - install IDLE
 package { "idle":
 	ensure  => present,
