@@ -35,7 +35,13 @@ package { "x11-xserver-utils":
 	require => Exec["apt-get update"],
 }
 
-# install  x11-xserver-utils 
+# virtualbox: install x11 guest addition drivers
+package { "virtualbox-ose-guest-x11":
+	ensure  => present,
+	require => Exec["apt-get update"],
+}
+
+# install  build-essential
 package { "build-essential":
 	ensure  => present,
 	require => Exec["apt-get update"],
@@ -91,6 +97,16 @@ file { '.xinitrc':
   owner         => root,
   group         => root,
   mode          => 0640,
+}
+
+file { ".config":
+  name					=> '/root/.config',
+  ensure 				=> directory,
+	source 				=> '/vagrant/files/config',
+  recurse 			=> true,
+  owner 				=> "root",
+  group 				=> "root",
+  mode 					=> 0644,
 }
 
 # deploy IDLE skins to prevent eye bleeds
