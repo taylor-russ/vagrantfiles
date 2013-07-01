@@ -13,7 +13,7 @@ Vagrant::Config.run do |config|
   
   ### Main ###    
   # Setup the box - using a publicly maintained base box
-  config.vm.box_url = "https://dl.dropboxusercontent.com/u/13054557/vagrant_boxes/debian-squeeze.box"
+  config.vm.box_url = "http://dl.dropboxusercontent.com/u/13054557/vagrant_boxes/debian-squeeze.box"
   config.vm.box = "debian-squeeze.box"
   
   # SSH - Forward 22 to 2222
