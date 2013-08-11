@@ -1,0 +1,7 @@
+ # set the cursor
+ xsetroot -cursor_name left_ptr
+ 
+ xrandr -s 1680x1050
+ 
+ # start xmonad
+ exec xmonad
