@@ -28,6 +28,12 @@ Vagrant::Config.run do |config|
 	# Enable 3d accel
 	config.vm.customize ["modifyvm", :id, "--accelerate3d", "on"]
 	
+	# Disable COM port
+	config.vm.customize ["modifyvm", :id, "--uart1", "off"]
+	
+	# Enabled shared clipboard
+	config.vm.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+
   # Apply cookbooks
   config.vm.provision :puppet do |puppet|
 	puppet.manifests_path = "manifests"
