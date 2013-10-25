@@ -1,9 +1,17 @@
 # Default (read: test) puppet manifest for debian dev box
 # Mirroring a test setup (done manually) for now.
 # TODO:
-#  - better way to create parent directories?
 #  - variablize username and configure box to add user
 #
+
+######################################################
+# Folder Prep Work
+######################################################
+
+# Ensure idlerc folder exists
+file { "/root/.idlerc":
+  ensure => 'directory',
+}
 
 ######################################################
 # EXEC COMMANDS
@@ -13,10 +21,6 @@ exec { "apt-get update":
 	path => "/usr/bin",
 }
 
-# ugly but works - TODO fix this later
-exec{'mkdir -p /root/.idlerc':
-				path => "/bin",
-}
 
 ######################################################
 # PACKAGES
@@ -124,7 +128,7 @@ file { 'config-highlight.cfg':
   owner         => root,
   group         => root,
   mode          => 0640,
-	require				=> Exec['mkdir -p /root/.idlerc'],
+	require				=> File['/root/.idlerc'],
 }
 
 # point IDLE to correct skin
@@ -135,5 +139,5 @@ file { 'config-main.cfg':
   owner         => root,
   group         => root,
   mode          => 0640,
-  require				=> Exec['mkdir -p /root/.idlerc'],
+  require				=> File['/root/.idlerc'],
 }
