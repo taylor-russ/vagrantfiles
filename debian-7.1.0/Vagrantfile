@@ -8,35 +8,42 @@
 
 Vagrant::Config.run do |config|
   
-  # Enable for console access in Virtualbox
-  config.vm.boot_mode = :gui
-  
-  ### Main ###    
-  # Setup the box - using a publicly maintained base box
-  config.vm.box_url = "https://dl.dropboxusercontent.com/s/s81xdpy80s2d60o/debian-7.1.0-amd64.box"
-  config.vm.box = "debian-wheezy.box"
-  
-  # SSH - Forward 22 to 2222
-  config.vm.forward_port 22, 2222
+	# Enable for console access in Virtualbox
+	config.vm.boot_mode = :gui
+
+	### Main ###    
+	# Setup the box - using a publicly maintained base box
+	config.vm.box_url = "https://dl.dropboxusercontent.com/s/s81xdpy80s2d60o/debian-7.1.0-amd64.box"
+	config.vm.box = "debian-wheezy.box"
+
+	# A host only network, just incase.
+	config.vm.network :hostonly, "10.0.0.2"
+
+	# SSH - Forward 22 to 2222
+	config.vm.forward_port 22, 2224
 
 	# System memory
 	config.vm.customize ["modifyvm", :id, "--memory", 2048]
-	
+
 	# Video memory
 	config.vm.customize ["modifyvm", :id, "--vram", 128]
-	
+
 	# Enable 3d accel
 	config.vm.customize ["modifyvm", :id, "--accelerate3d", "on"]
-	
+
 	# Disable COM port
 	config.vm.customize ["modifyvm", :id, "--uart1", "off"]
-	
+
 	# Enabled shared clipboard
 	config.vm.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
 
-  # Apply cookbooks
-  config.vm.provision :puppet do |puppet|
-	puppet.manifests_path = "manifests"
+	# Share the projects folder
+	config.vm.share_folder "projects", "/projects", "../projects"
+	config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
 
+	# Apply cookbooks
+	config.vm.provision :puppet do |puppet|
+		puppet.manifests_path = "../puppet/manifests"
+		puppet.manifest_file = "debian-7.1.0.pp"
 	end 
 end
